@@ -25,13 +25,14 @@ class SystemStatus:
             self.gcs_msg_count, self.ap_msg_count)
         sleep(0.5)
 
-        
+
     def update_gcs(self):
         try:
-            self.gcs_msg_count = self.queue_gcs.get_nowait()
-            self.logger.debug("[SYS_STATE]: get gcs_msg_count = %d", self.gcs_msg_count)
-            self.last_gcs_message_time = self.get_time()
-            self.gcs_timeout_exceeded = False
+            while True:
+                self.gcs_msg_count = self.queue_gcs.get_nowait()
+                self.logger.debug("[SYS_STATE]: get gcs_msg_count = %d", self.gcs_msg_count)
+                self.last_gcs_message_time = self.get_time()
+                self.gcs_timeout_exceeded = False
 
         except:
             self.logger.debug("[SYS_STATE]: No data in queue_gcs")
