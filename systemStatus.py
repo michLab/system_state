@@ -3,6 +3,7 @@ import queue
 
 
 class SystemStatus:
+    '''A class consuming gcs and ap data'''
     def __init__(self, logger, q_cpu, q_ap, q_gcs):
         self.logger = logger
         self.queue_cpu = q_cpu
